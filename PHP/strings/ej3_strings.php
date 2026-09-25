@@ -19,10 +19,13 @@ $parte2=substr($email,$arroba+1,$numFin);
 echo "Usuario $parte1"."<br>";
 echo "Dominio $parte2"."<br>";
 
-explo
 
+$array= explode(".",$parte2);
+printf("Organización: $array[0] <br>");
+printf("Extensión: $array[2] <br>");
 
-
+echo("El usuario contiene " .strlen($parte1)."<br>");
+echo("El del dominio contiene " .strlen($parte2)."<br>");
 
 
 ?>
