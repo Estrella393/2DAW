@@ -7,19 +7,41 @@
 <?php
 $url="https://www.tienda.es/productos/portail.php?id=34&marca=lenovo";
 
-$finProtocolo=(strpos("://", $url));
-$Protocolo=substr(0,$finProtocolo,$url);
+$finProtocolo=(strpos( $url,"://"));//dice donde EMPIEZA "://"
+$protocolo=substr($url,0,$finProtocolo);
 
-$inicioD=strpos("www", $url);
-$finD=strpos("es", $url);
-$Dominio=substr($inicio,$fin,$url);
+$inicioD=$finProtocolo+3;//para que no salga ://
+$finD=strpos($url, "/", $inicioD);;
+$dominio=substr($url,$inicioD ,$finD-$inicioD);//la url, el inicio, cuantos caracteres coje
 
 $finRuta(substr("?",$url));
-$ruta=strpos($finD,$finRuta, $url );
+$ruta=strpos($url, $finD, $finRuta-$finD );
 
+$array=explode("/",$ruta);//el primer no tiene contenido pq empieza por /
+$fichero=$array[2];
 
-printf("Protocolo : $Protocolo");
-printf("Dominio: $Dominio");
+$parametros=substr($url, $finRuta+1,);//saltamos ?, no hace falta poner fin
+$arrayParametros=explode("&", $parametros);
+$id = explode("=", $arrayParametros[0]);//ahora separo id de 34
+$marca = explode("=", $arrayParametros[1]);//y marca de lenovo
+?>
+<p>Salida 1</p></br>
+<?php
+printf("Protocolo : $protocolo <br>");
+printf("Dominio: $dominio <br>");
+printf("Ruta: $ruta <br>");
+printf("Fichero: $fichero <br>");
+printf("Parámetros: $parametros <br>");
+?>
+<p>Salida 2</p></br>
+<?php
+printf("Protocolo : $protocolo <br>");
+printf("Dominio: $dominio <br>");
+printf("Ruta: $ruta <br>");
+printf("Fichero: $fichero <br>");
+printf("Id del producto: $id[1] <br>");
+printf("Id del producto: $marca[1] <br>");
+
 ?>
 </BODY>
 </HTML>
