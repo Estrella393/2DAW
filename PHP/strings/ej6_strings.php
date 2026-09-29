@@ -5,7 +5,7 @@
 $log="192.168.1.25 - GET /productos/listados.php - 200 - Mozilla/5.0";
 
 $array1=explode(" ",$log);//0-7
-$array2=explode(".",$array1[4]); //separo en dos el recurso
+$array2=explode(".",$array1[3]); //separo en dos el recurso para sacar php
 
 echo "IP: $array1[0] <br>";
 echo "Método: $array1[2] <br>";
@@ -13,7 +13,7 @@ echo "Recurso: $array1[3] <br>";
 echo "Código: $array1[5] <br>";
 echo "Navegador: $array1[7] <br>";
 
-echo "Tipo de recurso".strtolower($array[1])."<br>";
+echo "Tipo de recurso". strtolower($array2[1])."<br>";
 echo "Petición correcta: " . ($array1[5] == 200 ? "SI" : "NO");
 
 /*if ($array1[5] == "200") { 

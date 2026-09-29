@@ -16,7 +16,7 @@ for ($inicio=1 ;$inicio<100;$inicio++){
     if ($inicio%2==0){
         $contPar++;
     }
-    else ($inicio%2!=0){
+    else {
         $contImpar++;
     }
 

@@ -3,7 +3,7 @@
 <HEAD><TITLE>EJ1 Strings -Analizador de nombres de usuario </TITLE></HEAD>
 <BODY>
 
-<p>Salida 1</p>
+
 <?php
 $url="https://www.tienda.es/productos/portail.php?id=34&marca=lenovo";
 
@@ -14,8 +14,8 @@ $inicioD=$finProtocolo+3;//para que no salga ://
 $finD=strpos($url, "/", $inicioD);;
 $dominio=substr($url,$inicioD ,$finD-$inicioD);//la url, el inicio, cuantos caracteres coje
 
-$finRuta(substr("?",$url));
-$ruta=strpos($url, $finD, $finRuta-$finD );
+$finRuta=strpos($url,"?");//dice donde empieza "?"
+$ruta=substr($url, $finD, $finRuta-$finD );//substr sustrae, strpos posicio
 
 $array=explode("/",$ruta);//el primer no tiene contenido pq empieza por /
 $fichero=$array[2];
