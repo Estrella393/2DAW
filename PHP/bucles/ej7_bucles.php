@@ -14,7 +14,7 @@ while ($num>0){
     $num = intdiv($num, 2);
     }
 //$binario = strrev($binario); no es necesario dar la vuelta, si desde el principio añadado el resto antes
-printf("%08d",$binario);//añadir lo ceros
+printf("%08d",$binario);//añadir lo ceros, d es entero decimal (es neseario decirle si es d,f o s)
 ?> 
  
 </BODY> 

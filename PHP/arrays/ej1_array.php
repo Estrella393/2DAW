@@ -1,7 +1,15 @@
 
 
 <HTML> 
-<HEAD><TITLE> EJ1 Bucles – Estadística secuencia </TITLE></HEAD> 
+<HEAD><TITLE> EJ1 Bucles – Estadística secuencia </TITLE>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+</style>
+</HEAD> 
 <BODY>
  
 <?php 
@@ -20,7 +28,7 @@ while (count($impar)<20) {
     $i++;//aqui para que cuente el 1
 }?>
 
-<table style="border-collapse: collapse">
+<table>
      <tr>
         <th>Indice</th>
         <th>Valor</th>
