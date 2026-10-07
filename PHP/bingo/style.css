@@ -1,0 +1,16 @@
+h1 {
+  text-align: center;
+}
+
+.bombo {
+  margin: 0 auto;
+  text-align: center;
+}
+
+button {
+  background-color: #9bc1e4; /*es el color de los huecos del carton*/
+  color: white;
+  border: none;
+  padding: 10px; /*espacion entre el texto interno y el borde del botom*/
+  font-size: 20px;
+}
