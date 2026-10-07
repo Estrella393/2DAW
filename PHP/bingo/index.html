@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bingo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+ <header class="cabecera">
+        <h1>BINGO</h1>
+ </header>
+
+    <!--incluye la imagen y el boton -->
+    <div class="bombo">
+        <h2>Bombo</h2>
+        <div class="bola"><!-- div de las imagenes -->
+            <img src="images/1.PNG">
+        <!--<img src="imges/<?php echo $bola; ?>.png"> poner cuando este hecho el php-->
+        </div>
+        <button>
+            Sacar bola
+        </button>
+    </div>
+
+    <h2>Cartones</h2>
+    <div class="cartones"><!-- div de los cartones  -->
+        
+       <!-- <?php foreach ($jugador1 as $nombreCarton => $carton) { ?> 
+            <div class="carton"> 
+                <h3><?php echo $nombreCarton; ?></h3> 
+                <table> 
+                    <?php foreach ($carton as $fila) { ?> 
+                        <tr>
+                             <?php foreach ($fila as $valor) { ?> 
+                                <?php if ($valor === null) { ?> 
+                                    <td class="vacio"></td> 
+                                <?php } else { ?> 
+                                    <td><?php echo $valor; ?></td> 
+                                <?php } ?> 
+                                <?php } ?> 
+                            </tr> 
+                            <?php } ?> 
+                        </table> 
+                    </div> 
+                    <?php } ?> 
+                </div> -->
+
+</body>
+</html>
