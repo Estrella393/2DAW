@@ -1,17 +1,35 @@
 
+body {
+  margin: 0;/*quita espacio arriba del header*/
+  background-color: #eef5fb;
+  }
 
-
+  /*titulo principal*/
 header { 
-  background-color: #9bc1e4; 
+  background-color: #3978b8; 
   padding: 20px; 
 } 
 
 h1 { 
   text-align: center; 
   color: white; 
-  margin: 0; 
+  margin: 0;
+  font-size: 40px;
+  letter-spacing: 4px;
 }
 
+/*titulo bombo y cartones*/
+h2{
+  text-align: center;
+  color: white;
+  background-color: #78aeda;
+  font-size: 28px;
+  margin: 25px 0 15px;
+  padding: 12px;
+  letter-spacing: 2px;
+}
+
+/*bombo*/
 .bombo {
   text-align: center;
 }
@@ -21,8 +39,10 @@ h1 {
   height: auto;
 }
 
+
+/*boton*/
 button {
-  background-color: #9bc1e4; /*es el color de los huecos del carton*/
+  background-color: #78aeda; /*es el color de los huecos del carton*/
   color: white;
   border: none;
   border-radius: 8px;
@@ -31,19 +51,44 @@ button {
   cursor: pointer;
 }
 button:hover { 
-  background-color: #7eadd6; 
+  background-color: #5f98c8; 
+}
+
+/*estilo cartones*/
+
+.cartones {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.persona {
+  text-align: center;
+  color: #3978b8;
+  font-size: 18px;
+  margin: 0 0 5px;
+  letter-spacing: 1px;
+}
+
+.persona-carton {
+  text-align: center;
+  color: #24415c;
+  font-size: 22px;
+  margin: 0 0 15px;
 }
 
 table { 
   border-collapse: collapse; 
 } 
-
 td { 
-  border: 1px solid black; 
+  border: 1px solid #3978b8; 
   width: 50px; 
   height: 50px; 
   text-align: center; 
+  font-weight: bold;
 } 
+/*null*/
 .vacio { 
   background-color: #9bc1e4; 
 }
+
