@@ -8,8 +8,7 @@
 </head>
 <body>
 <?php
-require "bombo.php";
-require "cartones.php";
+
 require "juego.php";
 
 
@@ -18,13 +17,13 @@ $bolasSacadas=bombo();
 $jugador1=cartones();
 
 $cartonOriginal = $jugador1;
+$jugador1=juego($bolasSacadas, $jugador1);  
+
 echo "Cartones iniciales del Jugador 1:<br>";
 echo "<pre>";//solo para visualizarlo
-var_dump($jugador1);
+var_dump($cartonOriginal);
 echo "</pre>";
 
-
-juego($bolasSacadas, $jugador1);  
 
 echo "Cartón final:<br>";
 echo "<pre>";
