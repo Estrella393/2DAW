@@ -20,15 +20,13 @@ $cartonOriginal = $jugador1;
 $jugador1=juego($bolasSacadas, $jugador1);  
 
 echo "Cartones iniciales del Jugador 1:<br>";
-echo "<pre>";//solo para visualizarlo
 var_dump($cartonOriginal);
-echo "</pre>";
+
 
 
 echo "Cartón final:<br>";
-echo "<pre>";
 var_dump($jugador1);
-echo "</pre>";
+
 
 ?>
 
