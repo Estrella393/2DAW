@@ -1,0 +1,78 @@
+
+form {
+			width: 80%;
+			border: 1px solid #a5a5a5;
+			margin: 40px auto;
+			padding: 0 15px 15px;
+			/*padding suberiro  a 0 porque quedaba un hueco */
+			box-shadow: 0 2px 6px #ddd;
+		}
+
+		h1 {
+			text-align: center;
+			font-size: 24px;
+			background-color: #edf4fc;
+			padding: 15px;
+			margin: 0 -15px 20px;
+			/*quito el margen para colorear */
+		}
+
+		input[type="number"] {
+			width: 100%;
+			border: 1px solid #a5a5a5;
+			padding: 6px;
+			margin: 6px 0 12px;
+			box-sizing: border-box;
+			/*que no se salga del borde*/
+		}
+
+		input[type="submit"],
+		input[type="reset"] {
+			width: 48%;
+			padding: 9px;
+			margin: 15px 0;
+			/*15px arriba y abajo*/
+			border: none;
+			border-radius: 4px;
+		}
+
+		input[type="submit"] {
+			background-color: #287bd1;
+			color: white;
+		}
+
+		input[type="reset"] {
+			background-color: #e2e6ee;
+		}
+
+		.recuadro {
+    	width: 55%;
+    	margin: 40px auto 20px;
+    	padding: 0 10px 10px;
+    	border: 1px solid #ddd;
+    	box-shadow: 0 2px 6px #ddd;
+		}
+
+
+		.resultado {
+			border: 1px solid green;
+			border-radius: 4px;
+			background-color: #f3f8f0;
+			text-align: center;
+			color: green;
+			padding: 10px;
+		}
+
+		.arriba {
+			width: 80%;
+			margin: 20px auto;
+		}
+
+		.abajo {
+			text-align: left;
+		}
+
+		.numeros{
+    		font-size:18px;
+    		color: black;
+		}
