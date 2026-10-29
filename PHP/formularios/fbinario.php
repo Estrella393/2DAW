@@ -38,7 +38,7 @@
 				</div>	
 			</div>
 		</div>
-	<?php endif; ?>
+	<?php endif; ?><!--o ":" y "endif;" o con php puro con corcheres y un echo-->
 
 	<form name='binario' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method='post'>
 		<h1>CONVERSOR BINARIO</h1>

@@ -53,9 +53,8 @@ if ($n1 === false) {
 		
 	
 	}
-	?>
-
-	<?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && $resultado != ""): ?>
+	function mostrarResultado($resultado){
+	if ($_SERVER['REQUEST_METHOD'] == 'POST' && $resultado != ""): ?>
 		<div class="recuadro">
 			<h1>CONVERSOR NUMERICO</h1>
 			<div class="resultado arriba">
@@ -65,7 +64,10 @@ if ($n1 === false) {
 				</div>	
 			</div>
 		</div>
-	<?php endif; ?>
+	<?php endif; 
+	}
+
+	mostrarResultado($resultado);?> 
 
 	<form name='conversor' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method='post'>
 		<h1>CONVERSOR NUMERICO</h1>
@@ -81,15 +83,7 @@ if ($n1 === false) {
 		<input type="submit" value="Enviar">
 		<input type="reset" value="Borrar">
 
-		<?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && $resultado != ""): ?>
-			<h1>CONVERSOR NUMERICO</h1>
-			<div class="resultado arriba">
-				<h3>Resultado de la conversión:</h3>
-				<div class="numeros">
-					<?php echo $resultado; ?> 
-				</div>	
-			</div>
-		<?php endif; ?>
+		<?php mostrarResultado($resultado);?> 
 
 
 
