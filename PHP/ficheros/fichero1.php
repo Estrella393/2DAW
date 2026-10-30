@@ -1,12 +1,9 @@
-<?php
+
+<?php 
+
+require "funciones.php";
+
 $resultado = "";
-function limpiar($dato)
-{
-	$dato = trim($dato);
-	$dato = stripslashes($dato);
-	$dato = htmlspecialchars($dato);
-	return $dato;
-}
 
 //Solo ejecutar si pulsamos SUBMIT
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -32,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $localidad=str_pad($localidad, 27, " ");
 
 
-		$datos = "$nombre;$ape1;$ape2;$fecha;$localidad".PHP_EOL;//no vale con poner br para saltar de linea
+		$datos = "$nombre $ape1 $ape2 $fecha $localidad".PHP_EOL;//no vale con poner br para saltar de linea
 		file_put_contents("datos.txt", $datos, FILE_APPEND);
 		$resultado = "Los datos se han guardado correctamente";
 		echo $resultado;
@@ -45,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 }?>
 
-
+<!DOCTYPE html
 
 <HTML>
 
@@ -56,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <BODY>
 
-	<form name='fichero' method='post' >
+	<form name='fichero' method='post'  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
 		<h1>fichero1.php</h1>
 		<strong>Nombre:</strong><br>
         <input type="text" name="nombre" required><br>

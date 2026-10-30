@@ -1,13 +1,8 @@
 
 <?php
-$resultado = "";
-function limpiar($dato)
-{
-	$dato = trim($dato);
-	$dato = stripslashes($dato);
-	$dato = htmlspecialchars($dato);
-	return $dato;
-}
+require "funciones.php";
+$resultado = "";//mirar funciones empty, etc
+
 
 //Solo ejecutar si pulsamos SUBMIT
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -45,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 <HTML>
-
 <HEAD>
 	<TITLE> FORMULARIO BASE </TITLE>
 
@@ -53,11 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <BODY>
 
-	<form name='fichero' method='post' >
-		<h1>fichero1.php</h1>
+	<form name='fichero' method='post'  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
+		<h1>fichero2.php</h1>
 		<strong>Nombre:</strong><br>
         <input type="text" name="nombre" required><br>
-
+        
 		<strong>Apellido1:</strong><br>
         <input type="text" name="ape1" required ><br>
 
@@ -79,3 +73,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </BODY>
 
 </HTML>
+		
