@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$fecha = limpiar($_POST["fecha"]);
 	$localidad = limpiar($_POST["localidad"]);
 
-	if ($nombre != "" && $email != ""&& $ape2 != "" && $fecha != "" && $localidad != "") {//solo nombre y email son obligatorios
+	if ($nombre != "" && $ape1 != ""&& $ape2 != "" && $fecha != "" && $localidad != "") {
 
     /*str_pad añade el valor que le digams hasta esa longitud
         otra opcion:
@@ -26,18 +26,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nombre = $nombre . " ";
     }*/
         $nombre=str_pad($nombre, 40, " ");
-        $ape1=str_pad($ape1, 41, " ");
+        $ape1=str_pad($ape1, 41, " ");//cuento desde que termina la anterior
         $ape2=str_pad($ape2, 42, " ");
         $fecha=str_pad($fecha, 10, " ");
         $localidad=str_pad($localidad, 27, " ");
 
 
-		$datos = "$nombre;$ape1;$ape2;$email;$sexo".PHP_EOL;//no vale con poner br para saltar de linea
+		$datos = "$nombre;$ape1;$ape2;$fecha;$localidad".PHP_EOL;//no vale con poner br para saltar de linea
 		file_put_contents("datos.txt", $datos, FILE_APPEND);
+		$resultado = "Los datos se han guardado correctamente";
+		echo $resultado;
 
         
-	} else {
+	/*} else {
 		$resultado = "Los datos no se han guardado correctamente";
+		echo $resultado;
+	} no tiene sentido ya que la parte de html no de deja pasar si te falta algo*/
 	}
 }?>
 
