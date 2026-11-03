@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 		$datos = "$nombre $ape1 $ape2 $fecha $localidad".PHP_EOL;//no vale con poner br para saltar de linea
-		file_put_contents("datos.txt", $datos, FILE_APPEND);
+		file_put_contents("alumnos1.txt", $datos, FILE_APPEND);
 		$resultado = "Los datos se han guardado correctamente";
 		echo $resultado;
 
