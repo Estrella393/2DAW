@@ -6,4 +6,12 @@ function limpiar($dato)
 	$dato = htmlspecialchars($dato);
 	return $dato;
 }
+
+
+
+function myException($exception) {
+    echo "Excepción capturada: " . $exception->getMessage();
+}
+
+set_exception_handler("myException");
 ?>
