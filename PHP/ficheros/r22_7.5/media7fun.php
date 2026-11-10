@@ -90,7 +90,26 @@ function calcularPuntuacion($repartidas){
     return $suma;
 }
 
-
+/*
+ganadores:
+si alguien saca 7.5 se lleva un 80%
+con un 7 es un 50% (en caso de que nadie tenga un 7.5)
+siempre a ese valor comun a repartir si hay mas ganadores */
+function calcularPremio($suma, $apuesta){//suma se refiere a puntuacion
+$premio="";
+if ($suma==7.5){
+    $premio=0.8*$apuesta;
+    echo "Han ganado con ".$suma. " puntos y recibe ".$premio;
+}
+else if ($suma==7){
+    $premio=0.5*$apuesta;
+    echo "Han ganado con ".$suma. " puntos y recibe ".$premio;
+}
+else{
+    echo "No hay ganadores: todos han superado los 7.5 puntos. El bote acumulado es de ".$apuesta;
+}
+return $premio; //para añadirlo al fichero
+}
 
 
 

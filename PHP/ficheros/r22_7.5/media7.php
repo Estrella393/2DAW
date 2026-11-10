@@ -34,6 +34,8 @@
     var_dump($cartasRepartidas);
     echo $puntuacion;
 
+    $totalPremio=calcularPremio($puntuacion, $apuesta);
+
 
     }
     ?>
