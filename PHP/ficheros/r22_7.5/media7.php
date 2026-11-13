@@ -32,10 +32,11 @@
     $cartasRepartidas=repartir($baraja, $cartas);
     $puntuacion=calcularPuntuacion($cartasRepartidas);
     var_dump($cartasRepartidas);
-    echo $puntuacion;
+    echo $puntuacion."<br>";
 
-    $totalPremio=calcularPremio($puntuacion, $apuesta);
-
+    $totalPremio=calcularPremio($puntuacion, $apuesta);//no hago un echo porque la probia funcion lo escribe
+    echo "<br>";
+    generarFichero($jugador1, $puntuacion, $totalPremio);
 
     }
     ?>

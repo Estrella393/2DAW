@@ -92,16 +92,17 @@ function calcularPuntuacion($repartidas){
 
 /*
 ganadores:
+gana quien mas se acerque, se reparte un 50% entre los ganadores
 si alguien saca 7.5 se lleva un 80%
-con un 7 es un 50% (en caso de que nadie tenga un 7.5)
-siempre a ese valor comun a repartir si hay mas ganadores */
+ */
 function calcularPremio($suma, $apuesta){//suma se refiere a puntuacion
-$premio="";
+$premio=0;//0 y no "" para que si nade gane me devuleva eso
+   
 if ($suma==7.5){
     $premio=0.8*$apuesta;
     echo "Han ganado con ".$suma. " puntos y recibe ".$premio;
 }
-else if ($suma==7){
+else if ($suma<7.5){
     $premio=0.5*$apuesta;
     echo "Han ganado con ".$suma. " puntos y recibe ".$premio;
 }
@@ -109,6 +110,23 @@ else{
     echo "No hay ganadores: todos han superado los 7.5 puntos. El bote acumulado es de ".$apuesta;
 }
 return $premio; //para añadirlo al fichero
+}
+
+
+function generarIniciales($jugador){
+    $separado =explode(" ",$jugador);//PRIMERO SEPARADOR
+    return substr($separado[0],0,1).substr($separado[1],0,1);//no es necesariio sprintf pq no utilizaba marcadores
+}
+
+//utilizar file que crea un array con las filas de los ficheros
+function generarFichero($jugador, $suma, $premio){
+    $iniciales=generarIniciales($jugador);
+    $datos=$iniciales."#".$suma."#".$premio."\n";//no es necesario $datos = sprintf("%s#%d#%s\n", $iniciales, $puntos, $premio);
+    $ultimaFila=sprintf("TOTAL PREMIOS#");//aun no hay mas jugadores asquie no tengo nada que sumar
+    //sacar fecha
+    $fecha = date('dmYHis');// día mes año hora minutos segundos
+    echo $fecha;
+    file_put_contents("apuestas_".$fecha.".txt", $datos);//no pongo file append porque supongo que se crea uno en cada partida
 }
 
 
