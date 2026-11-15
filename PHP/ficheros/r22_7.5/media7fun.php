@@ -125,8 +125,13 @@ function generarFichero($jugador, $suma, $premio){
     $ultimaFila=sprintf("TOTAL PREMIOS#");//aun no hay mas jugadores asquie no tengo nada que sumar
     //sacar fecha
     $fecha = date('dmYHis');// día mes año hora minutos segundos
-    echo $fecha;
-    file_put_contents("apuestas_".$fecha.".txt", $datos);//no pongo file append porque supongo que se crea uno en cada partida
+    $nombre="apuestas_".$fecha.".txt";//si pongo print solo me devulve 1
+    file_put_contents($nombre, $datos);//no pongo file append porque supongo que se crea uno en cada partida
+    return $nombre;
+}
+
+function escribirFichero($nombre){
+    readfile($nombre);
 }
 
 

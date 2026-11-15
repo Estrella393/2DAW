@@ -18,30 +18,53 @@
 
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $jugador1=$_POST["jugador1"];
+    $jugador1=limpiar($_POST["jugador1"]);
     //$jugador2=$_POST["jugador2"];
     //$jugador3=$_POST["jugador3"];
     //$jugador4=$_POST["jugador4"];
-    $cartas=$_POST["cartas"];
-    $apuesta=$_POST["apuesta"];
+    $cartas=limpiar($_POST["cartas"]);
+    $apuesta=limpiar($_POST["apuesta"]);
 
     //$jugadores=[$jugador1,$jugardor2,$jugardor3,$jugardor4];
     $baraja=crearBaraja();
-    var_dump($baraja);
 
     $cartasRepartidas=repartir($baraja, $cartas);
     $puntuacion=calcularPuntuacion($cartasRepartidas);
-    var_dump($cartasRepartidas);
-    echo $puntuacion."<br>";
+    //var_dump($cartasRepartidas);
+    //echo $puntuacion."<br>";
 
     $totalPremio=calcularPremio($puntuacion, $apuesta);//no hago un echo porque la probia funcion lo escribe
     echo "<br>";
-    generarFichero($jugador1, $puntuacion, $totalPremio);
+    $nombreFichero=generarFichero($jugador1, $puntuacion, $totalPremio);
+
+    $jugadores[] = [
+    "nombre" => $jugador1,
+    "cartas" => $cartasRepartidas,
+    "puntuacion" => $puntuacion,
+    "premio" => $totalPremio
+    ];
+    echo "<table border='1'>";
+    echo "<tr>";
+    echo "<td>".$jugadores[0]["nombre"]."</td>";
+    echo "<td><div class='cards'>";
+    foreach($jugadores[0]["cartas"] as $carta=>$valor){
+        echo "<img src=' images/".$carta."'  width='100' >";
+    }
+    echo "</div></td>";
+    echo "<td>".$jugadores[0]["puntuacion"]."</td>";
+    echo "<td>".$jugadores[0]["premio"]."</td>";
+    echo "</tr>";
+    echo "</table>";
+
 
     }
     ?>
 	
     <h2 style="margin-top:25px">Fichero generado</h2>
+    <?php 
+    echo $nombreFichero; 
+    echo "<br>";
+    escribirFichero($nombreFichero); ?>
     
 
 <p style="margin-top:22px"><a class="back" href="media7.html">← Volver al formulario</a></p>

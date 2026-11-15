@@ -17,7 +17,7 @@ require "funciones.php";
     
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $fichero = fopen("ibex35.xt", "r");//r de lectura
+    $fichero = fopen("ibex35.txt", "r");//r de lectura
 
     if ($fichero){//comprobamos que se ha abierto correctamente
     $lineas = file("ibex35.txt");//file lee su contenido y devuleve un array hecho de las filas
@@ -29,8 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         {2,}: dos o más veces. */
         array_pop($campos);//eliminar hora despues de hacer los campos
 
-        $datos[] = [//Estamos añadiendo un nuevo array asociativo dentro de $datos
-            'valor'  => $campos[0],
+        $datos[] = [//creo un array datos, donde le pongo a cada compo una clave de array asociativo para poner buscarlo mejor
+            'valor'  => $campos[0],//en cada vuelta añado un valor diferente
             'ultimo'  => $campos[1],
             'var%' => $campos[2],
             'var'     => $campos[3],
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <th>Capit</th>
             </tr>
 
-            <?php foreach ($datos as $valor) { ?>
+            <?php foreach ($datos as $valor) { //foreach procesa una fila añado un nuevo array asociativo?>
                 <tr>
                     <td><?php echo $valor['valor']; ?></td>
                     <td><?php echo $valor['ultimo']; ?></td>
