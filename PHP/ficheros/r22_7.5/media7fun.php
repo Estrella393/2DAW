@@ -66,26 +66,37 @@ function repartirAntiguo($variableBaraja, $numCartas){
 }
 
 
-function repartir($variableBaraja, $numCartas){
+
+
+function repartir($variableBaraja, $numCartas, $arrayJugadores){
     //shuffle($variableBaraja); shuffle renombra los indices y quitaria la clave 
     $nombre=array_keys($variableBaraja);//array_keys devuelve todas las keys, o recorreo con buble y lurgo con key()
     shuffle($nombre);
-    $repartidas=[];//para no perder las cartas que se reparten
-    for ($i=0; $i<$numCartas; $i++){
-        $elegida=array_pop($nombre);
-        $repartidas[$elegida]=$variableBaraja[$elegida];
+    $i=0;
+    $arrayJugadoresCartas=[];
+    foreach($arrayJugadores as $jugador){
+        $i++;
+        $repartidas=[];
+        for ($j=0; $j<$numCartas; $j++){
+            $elegida=array_pop($nombre);
+            $repartidas[$elegida]=$variableBaraja[$elegida];
+        }
+        $arrayJugadoresCartas=['jugador'.$i => $repartidas[]];
     }
-    return  $repartidas;
+
+    return  $arrayJugadoresCartas;
 }
 
 
 
-function calcularPuntuacion($repartidas){
-    
-    $suma=0;
-    foreach   ($repartidas as $repartida){//repartida es un array asocitativo, asique $repartida me devuleve el valor
-    //o foreach ($repartidas as $repartida=>$valor){ y acceder con $valor  
-        $suma=$suma + $repartida;
+function calcularPuntuacion($arrayJugadoresCartas){
+    $arrayJugadoresPuntuacion=[];
+    foreach($arrayJugadoresCartas as $jugador=>$cartas){
+        $suma=0;
+        foreach($jugador as $cartas=>$puntuacion){//repartida es un array asocitativo, asique $repartida me devuleve el valor
+        //o foreach ($repartidas as $repartida=>$valor){ y acceder con $valor 
+            $suma=$suma + $puntuacion;
+        }
     }
     return $suma;
 }

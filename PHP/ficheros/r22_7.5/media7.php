@@ -19,17 +19,17 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jugador1=limpiar($_POST["jugador1"]);
-    //$jugador2=$_POST["jugador2"];
-    //$jugador3=$_POST["jugador3"];
-    //$jugador4=$_POST["jugador4"];
+    $jugador2=$_POST["jugador2"];
+    $jugador3=$_POST["jugador3"];
+    $jugador4=$_POST["jugador4"];
     $cartas=limpiar($_POST["cartas"]);
     $apuesta=limpiar($_POST["apuesta"]);
 
-    //$jugadores=[$jugador1,$jugardor2,$jugardor3,$jugardor4];
+    $jugadores=[$jugador1,$jugardor2,$jugardor3,$jugardor4];
     $baraja=crearBaraja();
 
-    $cartasRepartidas=repartir($baraja, $cartas);
-    $puntuacion=calcularPuntuacion($cartasRepartidas);
+    $arrayJugadoresCarta=repartir($baraja, $cartas);
+    $puntuacion=calcularPuntuacion($arrayJugadoresCarta);
     //var_dump($cartasRepartidas);
     //echo $puntuacion."<br>";
 
