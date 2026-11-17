@@ -46,7 +46,7 @@ function crearBaraja(){
 } 
 
 //puedo hacer esto pero prefiero hacer dos funciones separadas
-function repartirAntiguo($variableBaraja, $numCartas){
+/*function repartirAntiguo($variableBaraja, $numCartas){
     //shuffle($variableBaraja); shuffle renombra los indices y quitaria la clave 
     $nombre=array_keys($variableBaraja);//array_keys devuelve todas las keys, o recorreo con buble y lurgo con key()
     shuffle($nombre);
@@ -63,7 +63,7 @@ function repartirAntiguo($variableBaraja, $numCartas){
         "repartidas" => $repartidas,
         "suma" => $suma
     ];
-}
+}*/
 
 
 
@@ -81,24 +81,43 @@ function repartir($variableBaraja, $numCartas, $arrayJugadores){
             $elegida=array_pop($nombre);
             $repartidas[$elegida]=$variableBaraja[$elegida];
         }
-        $arrayJugadoresCartas=['jugador'.$i => $repartidas[]];
+        //lo pongo asi porque despues voy a añadir mas datos y es mucho mas claro
+        $arrayJugadoresCartas=['jugador'.$i]=
+        ['cartas'=>$repartidas];
+        
+        
+        
+        
+        // ERROR $arrayJugadoresCartas=['jugador'.$i => $repartidas[]];//al hacer esto cada vez creo un nuevo array =[], por lo  tanto solo me devolveria el jugador 4
+        //ademas, en todo caso seria repartidas, sin [] 
+    
+        //forma CORRECTA DE EL ERROR ANTIGUO $arrayJugadoresCartas['jugador'.$i] = $repartidas;
+    /*IMPORTANTE
+    =[] creo array
+    []=asigno  */
     }
-
     return  $arrayJugadoresCartas;
 }
 
 
 
 function calcularPuntuacion($arrayJugadoresCartas){
-    $arrayJugadoresPuntuacion=[];
+    $arrayJugadoresCartasPuntuacion=[];
     foreach($arrayJugadoresCartas as $jugador=>$cartas){
         $suma=0;
-        foreach($jugador as $cartas=>$puntuacion){//repartida es un array asocitativo, asique $repartida me devuleve el valor
+        foreach($cartas as $carta=>$puntuacion){
+        //comentarios de cuando estaba con 1 jugador: repartida es un array asocitativo, asique $repartida me devuleve el valor
         //o foreach ($repartidas as $repartida=>$valor){ y acceder con $valor 
             $suma=$suma + $puntuacion;
         }
+         $arrayJugadoresCartasPuntuacion[$jugador]=//CON FOREACH NO NECESITO CONTADOR
+        ['cartas'=>$repartidas],
+        ['puntuacion'=>$suma];
+   
+    // ERROR ANTIGUO $arrayJugadoresCartasPuntuacion=['jugador'.$i => $repartidas[],$suma]; 
+    //CORRECCION ANTIGUA: lo mismo que he añadido ahora "lo renombro" en esta funcion y me quedaria igual;   
     }
-    return $suma;
+    return $arrayJugadoresCartasPuntuacion;
 }
 
 /*
@@ -106,7 +125,8 @@ ganadores:
 gana quien mas se acerque, se reparte un 50% entre los ganadores
 si alguien saca 7.5 se lleva un 80%
  */
-function calcularPremio($suma, $apuesta){//suma se refiere a puntuacion
+function calcularPremio($arrayJugadoresCartasPuntuacion, $apuesta){//suma se refiere a puntuacion
+$arrayCompleto=[];
 $premio=0;//0 y no "" para que si nade gane me devuleva eso
    
 if ($suma==7.5){
