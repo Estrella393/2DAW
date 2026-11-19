@@ -19,41 +19,44 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jugador1=limpiar($_POST["jugador1"]);
-    $jugador2=$_POST["jugador2"];
-    $jugador3=$_POST["jugador3"];
-    $jugador4=$_POST["jugador4"];
+    $jugador2=limpiar($_POST["jugador2"]);
+    $jugador3=limpiar($_POST["jugador3"]);
+    $jugador4=limpiar($_POST["jugador4"]);
     $cartas=limpiar($_POST["cartas"]);
     $apuesta=limpiar($_POST["apuesta"]);
 
-    $jugadores=[$jugador1,$jugardor2,$jugardor3,$jugardor4];
+    $jugadores=[$jugador1,$jugador2,$jugador3,$jugador4];
+
+    $iniciales=generarIniciales($jugadores);
+
     $baraja=crearBaraja();
 
-    $arrayJugadoresCarta=repartir($baraja, $cartas);
+    $arrayJugadoresCarta=repartir($baraja, $cartas,$jugadores);
     $puntuacion=calcularPuntuacion($arrayJugadoresCarta);
-    //var_dump($cartasRepartidas);
-    //echo $puntuacion."<br>";
+    
+    //solo para meter al fichero
+    $totalPremio=calcularPremio($puntuacion, $apuesta);
+    
+    $arrayCompleto = calcularPremioIndividual($puntuacion, $apuesta);
 
-    $totalPremio=calcularPremio($puntuacion, $apuesta);//no hago un echo porque la probia funcion lo escribe
-    echo "<br>";
-    $nombreFichero=generarFichero($jugador1, $puntuacion, $totalPremio);
+    $nombreFichero=generarFichero($arrayCompleto, $jugadores, $totalPremio);
 
-    $jugadores[] = [
-    "nombre" => $jugador1,
-    "cartas" => $cartasRepartidas,
-    "puntuacion" => $puntuacion,
-    "premio" => $totalPremio
-    ];
+    
     echo "<table border='1'>";
-    echo "<tr>";
-    echo "<td>".$jugadores[0]["nombre"]."</td>";
-    echo "<td><div class='cards'>";
-    foreach($jugadores[0]["cartas"] as $carta=>$valor){
+    $i=0;
+    foreach ($arrayCompleto as $jugador){
+        echo "<tr>";
+        echo "<td>".$iniciales[$i]."</td>";
+        echo "<td><div class='cards'>";
+        foreach($jugador["cartas"] as $carta=>$valor){//$jugadores[0]["cartas"]
         echo "<img src=' images/".$carta."'  width='100' >";
     }
-    echo "</div></td>";
-    echo "<td>".$jugadores[0]["puntuacion"]."</td>";
-    echo "<td>".$jugadores[0]["premio"]."</td>";
-    echo "</tr>";
+        echo "</div></td>";
+        echo "<td>".$jugador["puntuacion"]."</td>";
+        echo "<td>".$jugador["premio"]."</td>";
+        echo "</tr>";
+    }
+    
     echo "</table>";
 
 
