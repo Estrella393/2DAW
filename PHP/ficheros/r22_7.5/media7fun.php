@@ -82,8 +82,9 @@ function repartir($variableBaraja, $numCartas, $arrayJugadores){
             $repartidas[$elegida]=$variableBaraja[$elegida];
         }
         //lo pongo asi porque despues voy a añadir mas datos y es mucho mas claro
-        $arrayJugadoresCartas=['jugador'.$i]=
-        ['cartas'=>$repartidas];
+        $arrayJugadoresCartas['jugador'.$i]=[
+            'cartas'=>$repartidas
+            ];
         
         
         
@@ -99,20 +100,26 @@ function repartir($variableBaraja, $numCartas, $arrayJugadores){
     return  $arrayJugadoresCartas;
 }
 
-
+/*$repartidas = [
+    'cartas' => [
+        '1' => 1,
+        'K' => 0.5
+    ]
+]; */
 
 function calcularPuntuacion($arrayJugadoresCartas){
     $arrayJugadoresCartasPuntuacion=[];
-    foreach($arrayJugadoresCartas as $jugador=>$cartas){
+    foreach($arrayJugadoresCartas as $jugador=>$repartidas){//recorro jugasores
         $suma=0;
-        foreach($cartas as $carta=>$puntuacion){
+        foreach($repartidas['cartas'] as $carta=>$puntuacion){//recorro cartas:tengo que acceder con la clave ['cartas']
         //comentarios de cuando estaba con 1 jugador: repartida es un array asocitativo, asique $repartida me devuleve el valor
         //o foreach ($repartidas as $repartida=>$valor){ y acceder con $valor 
-            $suma=$suma + $puntuacion;
+            $suma=$suma + $puntuacion;//CON FOREACH NO NECESITO CONTADOR
         }
-         $arrayJugadoresCartasPuntuacion[$jugador]=//CON FOREACH NO NECESITO CONTADOR
-        ['cartas'=>$repartidas],
-        ['puntuacion'=>$suma];
+        $arrayJugadoresCartasPuntuacion[$jugador]=[
+            'cartas'=>$repartidas['cartas'],
+            'puntuacion'=>$suma
+        ];
    
     // ERROR ANTIGUO $arrayJugadoresCartasPuntuacion=['jugador'.$i => $repartidas[],$suma]; 
     //CORRECCION ANTIGUA: lo mismo que he añadido ahora "lo renombro" en esta funcion y me quedaria igual;   
@@ -120,46 +127,112 @@ function calcularPuntuacion($arrayJugadoresCartas){
     return $arrayJugadoresCartasPuntuacion;
 }
 
+
+//buscar la mejor puntuacion de los 4
+function mayorPuntuacion($arrayJugadoresCartasPuntuacion){
+    $max=0;
+    foreach ($arrayJugadoresCartasPuntuacion as $jugador => $datos) {//datos tiene todos lo arrays 
+        if ($datos['puntuacion']==7.5) {
+            $max=7.5;
+        }
+        else if ($datos['puntuacion']<7.5) {
+            if ($datos['puntuacion']>$max) {//
+                $max = $datos['puntuacion'];
+            }
+        }
+    }
+    return $max;
+}
+
+
+
 /*
 ganadores:
 gana quien mas se acerque, se reparte un 50% entre los ganadores
 si alguien saca 7.5 se lleva un 80%
  */
 function calcularPremio($arrayJugadoresCartasPuntuacion, $apuesta){//suma se refiere a puntuacion
+<<<<<<< HEAD
 $arrayCompleto=[];
 $premioTotal=0;//0 y no "" para que si nade gane me devuleva eso
 $contGanadores=0;
    
 if ($suma==7.5){
+=======
+$premio=0;//0 y no "" para que si nade gane me devuleva eso
+$max= mayorPuntuacion($arrayJugadoresCartasPuntuacion);
+if ($max==7.5){
+>>>>>>> 7e0bfe057178bcec5dfcedb86ca3dfbefc2bf897
     $premio=0.8*$apuesta;
-    echo "Han ganado con ".$suma. " puntos y recibe ".$premio;
 }
-else if ($suma<7.5){
+else if ($max<7.5){
     $premio=0.5*$apuesta;
-    echo "Han ganado con ".$suma. " puntos y recibe ".$premio;
+}//si no entra en ninguno de esos dos, no gana nadie y devulevo 0
+return $premio; 
 }
-else{
-    echo "No hay ganadores: todos han superado los 7.5 puntos. El bote acumulado es de ".$apuesta;
-}
-return $premio; //para añadirlo al fichero
-}
+/*foreach ($arrayJugadoresCartasPuntuacion as $jugador){//o:as $jugador => $datos y acceder con $datos['puntuacion']
+   foreach ($jugador['puntuacion'] as $puntuaciones) { */
 
 
-function generarIniciales($jugador){
-    $separado =explode(" ",$jugador);//PRIMERO SEPARADOR
-    return substr($separado[0],0,1).substr($separado[1],0,1);//no es necesariio sprintf pq no utilizaba marcadores
+
+function calcularPremioIndividual($arrayJugadoresCartasPuntuacion,$apuesta) {
+$premioTotal=calcularPremio($arrayJugadoresCartasPuntuacion, $apuesta) ;   
+$max= mayorPuntuacion($arrayJugadoresCartasPuntuacion);
+$numGanadores = 0;
+$premioIndividual = 0;
+$arrayCompleto = [];
+foreach ($arrayJugadoresCartasPuntuacion as $jugador){
+    if ($jugador['puntuacion']==$max) {
+        $numGanadores++;
+    }
+}
+if ($numGanadores>0) {//sino, se queda como esta inicializada en 0
+    $premioIndividual = $premioTotal/$numGanadores;
+}
+foreach ($arrayJugadoresCartasPuntuacion as $jugador => $datos) {
+$premio = 0;
+    if ($datos['puntuacion'] == $max) {
+        $premio = $premioIndividual;
+    }
+    $arrayCompleto[$jugador] = [
+        /*NO PUEDO HACER  $arrayCompleto[$jugador] si tengo oreach ($arrayJugadoresCartasPuntuacion as $jugador 
+        porque eso es TODO el array, no cada jugador. En cambio si es la clave si puedo*/
+        'cartas' => $datos['cartas'],
+        'puntuacion' => $datos['puntuacion'],
+        'premio' => $premio
+        ];
+}
+return $arrayCompleto;
+} 
+
+
+
+
+function generarIniciales($arrayJugadores){
+    $iniciales=[];
+    foreach ($arrayJugadores as $jugador) {
+        $separado =explode(" ",$jugador);//PRIMERO SEPARADOR
+        $iniciales[]=substr($separado[0],0,1).substr($separado[1],0,1);//no es necesariio sprintf pq no utilizaba marcadores
+    }  
+    return $iniciales;
 }
 
 //utilizar file que crea un array con las filas de los ficheros
-function generarFichero($jugador, $suma, $premio){
-    $iniciales=generarIniciales($jugador);
-    $datos=$iniciales."#".$suma."#".$premio."\n";//no es necesario $datos = sprintf("%s#%d#%s\n", $iniciales, $puntos, $premio);
-    $ultimaFila=sprintf("TOTAL PREMIOS#");//aun no hay mas jugadores asquie no tengo nada que sumar
-    //sacar fecha
-    $fecha = date('dmYHis');// día mes año hora minutos segundos
-    $nombre="apuestas_".$fecha.".txt";//si pongo print solo me devulve 1
-    file_put_contents($nombre, $datos);//no pongo file append porque supongo que se crea uno en cada partida
-    return $nombre;
+function generarFichero($arrayCompleto,$arrayJugadores, $totalPremio){
+$iniciales=generarIniciales($arrayJugadores);
+$datos="";
+$i=0; 
+foreach ($arrayCompleto as $jugador) {
+    $datos = $datos.$iniciales[$i]."#".$jugador['puntuacion']."#".$jugador['premio']."\n";//no es necesario $datos = sprintf("%s#%d#%s\n", $iniciales, $puntos, $premio);
+    $i++;
+}    
+$ultimaFila=sprintf("TOTAL PREMIOS#$totalPremio");//aun no hay mas jugadores asquie no tengo nada que sumar
+    
+//sacar fecha
+$fecha = date('dmYHis');// día mes año hora minutos segundos
+$nombre="apuestas_".$fecha.".txt";//si pongo print solo me devulve 1
+file_put_contents($nombre, $datos.$ultimaFila);//no pongo file append porque supongo que se crea uno en cada partida
+return $nombre;
 }
 
 function escribirFichero($nombre){
