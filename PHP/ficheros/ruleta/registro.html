@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ruleta</title>
+  </head>
+
+  <body>
+    <main>
+      <div>
+        <h1>Ruleta LVD</h1>
+      </div>
+      <section>
+        <h2>Registro de Jugadores- Desarrollo Web en Entorno Servidor</h2>
+        <form method="post" action="registro.php">
+          <div>
+            <div>
+              <strong>DNI:</strong><br />
+              <input type="text" name="dniReg" value="12345678Z" required />
+            </div>
+            <div>
+              <strong>Nombre:</strong><br />
+              <input type="text" name="nomReg" required />
+            </div>
+            <div>
+              <strong>Primer apellido:</strong><br />
+              <input type="text" name="ap1Reg" required />
+            </div>
+            <div>
+              <strong>Segundo apellido:</strong><br />
+              <input type="text" name="ap2Reg" required />
+            </div>
+            <div>
+              <strong>Fecha de nacimiento:</strong><br />
+              <input type="date" name="fechaReg" required />
+            </div>
+            <div>
+              <strong>Alias</strong><br />
+              <input type="text" name="aliasReg" required />
+            </div>
+            <div>
+              <strong>Saldo inicial($)</strong><br />
+              <input type="text" name="saldoReg" required />
+            </div>
+          </div>
+          <div>
+            <button type="submit">Registrar jugador</button>
+            <button type="reset">Limpiar formulario</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

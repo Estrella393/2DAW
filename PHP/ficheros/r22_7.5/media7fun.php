@@ -127,7 +127,8 @@ si alguien saca 7.5 se lleva un 80%
  */
 function calcularPremio($arrayJugadoresCartasPuntuacion, $apuesta){//suma se refiere a puntuacion
 $arrayCompleto=[];
-$premio=0;//0 y no "" para que si nade gane me devuleva eso
+$premioTotal=0;//0 y no "" para que si nade gane me devuleva eso
+$contGanadores=0;
    
 if ($suma==7.5){
     $premio=0.8*$apuesta;
