@@ -13,7 +13,7 @@
       </div>
       <section>
         <h2>Registro de Jugadores- Desarrollo Web en Entorno Servidor</h2>
-        <form method="post" action="registro.php">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method='post'>
           <div>
             <div>
               <strong>DNI:</strong><br />
@@ -53,3 +53,19 @@
     </main>
   </body>
 </html>
+  <?php
+  
+require funciones.php
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $dniReg=$_POST["dniReg"];
+        $nomReg=$_POST["nomReg"];
+        $ap1Reg=$_POST["ap1Reg"];
+        $ap2Reg=$_POST["ap2Reg"];
+        $fechaReg=$_POST["fechaReg"];
+        $aliasReg=$_POST["aliasReg"];
+        $saldoReg=$_POST["saldoReg"];
+   
+        agregar_registro_delim($dniReg,$nombreReg, $ap1Reg, $ap2Reg, $fechaReg, $aliasReg,$saldoReg)
+    }
+        ?>
